@@ -1,0 +1,45 @@
+body {
+  font-family: "Coming Soon", sans-serif;
+  background-image: url('/images/corkboard.jpeg');
+  text-align: center;
+}
+.hidden {
+  display: none;
+}
+.show {
+  background-image: url('/images/notecard.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: block;
+  height: 160px;
+  width: 50%;
+  margin: 50px auto;
+}
+.studentName {
+  padding-top: 5px;
+  font-size: 20px;
+}
+.shoutoutP {
+  font-size: 15px;
+  padding: 5px;
+}
+.redpin {
+	background: url('/images/pinsprite.png') no-repeat -7px -7px;
+	width: 38px;
+	height: 50px;
+  margin: -25px -15px 0 0;
+  float: right;
+}
+.bluepin {
+	background: url('/images/pinsprite.png') no-repeat -90px -10px;
+	width: 37px;
+	height: 51px;
+  margin: -25px 0 0 0;
+  float: left;
+}
+#head {
+  background-color: white;
+  border-radius: 25px;
+  width: 60%;
+  margin: 10px auto;
+}

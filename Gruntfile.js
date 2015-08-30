@@ -17,7 +17,7 @@ module.exports = function(grunt) {
            {expand: true, cwd: 'node_modules/bootstrap/dist/js', src: 'bootstrap.min.js', dest:'public/vendors/', filter: 'isFile'},
            {expand: true, cwd: 'node_modules/bootstrap/fonts', src: '*', dest:'public/fonts/', filter: 'isFile'},
            {expand: true, cwd: 'client/images', src: 'corkboard.jpeg', dest:'public/images/', filter: 'isFile'},
-           {expand: true, cwd: 'client/images', src: 'Notecard.jpg', dest:'public/images/', filter: 'isFile'},
+           {expand: true, cwd: 'client/images', src: 'notecard.jpg', dest:'public/images/', filter: 'isFile'},
            {expand: true, cwd: 'client/images', src: 'pinsprite.png', dest:'public/images/', filter: 'isFile'},
            {expand: true, cwd: 'client', src: 'vendors/*', dest:'public/', filter: 'isFile'},
            {expand: true, cwd: 'client', src: 'stylesheets/*', dest: 'public/', filter: 'isFile'}

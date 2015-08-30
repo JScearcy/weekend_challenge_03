@@ -34,32 +34,33 @@ $(document).ready(function(){
     var $nextBut = $('<button>').attr({class: 'nextBut', id: 'Next'}).text('Next').append($('<span>').attr({class: 'glyphicon glyphicon-chevron-right'}));
     var $prevBut = $('<button>').attr({class: 'prevBut', id: 'Prev'}).text('Prev').prepend($('<span>').attr({class: 'glyphicon glyphicon-chevron-left'}));
     var $randBut = $('<button>').attr({class: 'randBut', id: 'Rand'}).text('Random')
-    $('#' + indexCount).show({effect: 'fade', duration: 500});
+    $('#' + indexCount).show({effect: 'blind', direction: 'vertical', duration: 400});
     // $('#' + indexCount).webTicker();
     $infoContainer.append($prevBut).append($randBut).append($nextBut);
   //when the next button is clicked, hides the current slide and shows the next one.
   $infoContainer.on('click', '#Next', function(){
-    $('#' + indexCount).hide({effect: 'explode', pieces: 25});
+    $('#' + indexCount).hide({effect: 'fade'});
     indexCount++;
     if(indexCount == 19) {
       indexCount = 1;
     }
-    $('#' + indexCount).delay(400).show({effect: 'fade', duration: 500});
+    $('#' + indexCount).delay(400).show({effect: 'blind', direction: 'vertical', duration: 400});
   });
   //when the prev button is clicke, hides the current slide and shows the previous one
   $infoContainer.on('click', '#Prev', function(){
-    $('#' + indexCount).hide({effect: 'explode', pieces: 25});
+    $('#' + indexCount).hide({effect: 'fade'});
     indexCount--;
     if(indexCount == 0) {
       indexCount = 18;
     }
-    $('#' + indexCount).delay(400).show({effect: 'fade', duration: 500});
+    $('#' + indexCount).delay(400).show({effect: 'blind', direction: 'vertical', duration: 400});
   });
+  //when the random button is clicked pick random index number and display it
   $infoContainer.on('click', '#Rand', function (){
     var randID = Math.floor((Math.random() * (shoutOuts.length - 1)) + 1);
-    $('#' + indexCount).hide({effect: 'explode', pieces: 25});
+    $('#' + indexCount).hide({effect: 'fade'});
     indexCount = randID
-    $('#' + indexCount).delay(400).show({effect: 'fade', direction: 'left', duration: 500});
+    $('#' + indexCount).delay(400).show({effect: 'blind', direction: 'vertical', duration: 400});
   })
   })
 })

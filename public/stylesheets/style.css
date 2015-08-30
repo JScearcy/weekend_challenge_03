@@ -3,25 +3,17 @@ body {
   background-image: url('/images/corkboard.jpeg');
   text-align: center;
 }
-.hidden {
-  display: none;
-}
-.show {
+.students {
   background-image: url('/images/notecard.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   display: block;
-  height: 160px;
+  height: 320px;
   width: 50%;
   margin: 50px auto;
 }
-.studentName {
-  padding-top: 5px;
-  font-size: 20px;
-}
-.shoutoutP {
-  font-size: 15px;
-  padding: 5px;
+.studentShoutOut {
+  list-style-type: none;
 }
 .redpin {
 	background: url('/images/pinsprite.png') no-repeat -7px -7px;
@@ -42,4 +34,40 @@ body {
   border-radius: 25px;
   width: 60%;
   margin: 10px auto;
+}
+@media (min-width: 1328px) {
+  .studentName {
+    padding-top: 5px;
+    font-size: 25px;
+  }
+  .shoutOut {
+    font-size: 25px;
+  }
+}
+@media (min-width: 1127px) and (max-width: 1327px) {
+  .studentName {
+    padding-top: 5px;
+    font-size: 20px;
+  }
+  .shoutOut {
+    font-size: 20px;
+  }
+}
+@media (min-width: 700px) and (max-width: 1126px) {
+  .studentName {
+    padding-top: 5px;
+    font-size: 20px;
+  }
+  .shoutOut {
+    font-size: 15px;
+  }
+}
+@media (max-width: 700px) {
+  .studentName {
+    padding-top: 5px;
+    font-size: 20px;
+  }
+  .shoutOut {
+    font-size: 13px;
+  }
 }

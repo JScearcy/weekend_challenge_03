@@ -1,6 +1,6 @@
 $(document).ready(function(){
-
   $shoutOutDiv = $('.students');
+  $infoContainer = $('.infoContainer');
   var indexCount = 1;
   var shoutOuts = [];
   $h1 = $('#head');
@@ -17,13 +17,12 @@ $(document).ready(function(){
   //this will append all students, and their shout outs to the dom, but hide them as well, also adds different but related ids to items that will be targeted
   function displayShoutOut(obj){
     $newShoutDiv = $('<div>').attr({class: 'studentShoutOut', id: obj.id});
-    $rightpinDiv = $('<div>').attr({class: 'redpin'});
-    $leftpinDiv = $('<div>').attr({class: 'bluepin'});
-    $newNameP = $('<p>').attr({class: 'studentName', id: (obj.id + obj.id)});
-    $newShoutP = $('<p>').attr({class: 'shoutoutP', id: (obj.id + obj.id + obj.id)});
-    $newNameP.text(obj.name);
-    $newShoutP.text(obj.shoutout);
-    $newShoutDiv.append($rightpinDiv).append($leftpinDiv).append($newNameP).append($newShoutP);
+    $newShoutUl = $('<ul>');
+    $newNameLi = $('<li>').attr({class: 'studentName', id: ('name' + obj.id + obj.id)});
+    $newShoutLi = $('<li>').attr({class: 'shoutOut', id: ('Shout' + obj.id + obj.id)});
+    $newNameLi.text(obj.name);
+    $newShoutLi.text(obj.shoutout);
+    $newShoutDiv.append($newNameLi).append($newShoutLi);
     $shoutOutDiv.append($newShoutDiv.hide());
   }
   //when the ajax query completes this runs the display function for each object in the array and adds next/prev buttons, and shows the first item
@@ -34,25 +33,33 @@ $(document).ready(function(){
     })
     var $nextBut = $('<button>').attr({class: 'nextBut', id: 'Next'}).text('Next').append($('<span>').attr({class: 'glyphicon glyphicon-chevron-right'}));
     var $prevBut = $('<button>').attr({class: 'prevBut', id: 'Prev'}).text('Prev').prepend($('<span>').attr({class: 'glyphicon glyphicon-chevron-left'}));
-    $('div div:first-child').show('fade').addClass('show');
-    $shoutOutDiv.append($prevBut).append($nextBut);
+    var $randBut = $('<button>').attr({class: 'randBut', id: 'Rand'}).text('Random')
+    $('#' + indexCount).show();
+    // $('#' + indexCount).webTicker();
+    $infoContainer.append($prevBut).append($randBut).append($nextBut);
   //when the next button is clicked, hides the current slide and shows the next one.
-  $shoutOutDiv.on('click', '#Next', function(){
-    $('#' + indexCount).hide().removeClass('show');
+  $infoContainer.on('click', '#Next', function(){
+    $('#' + indexCount).hide();
     indexCount++;
     if(indexCount == 19) {
       indexCount = 1;
     }
-    $('#' + indexCount).show('fade').addClass('show');
+    $('#' + indexCount).show();
   });
   //when the prev button is clicke, hides the current slide and shows the previous one
-  $shoutOutDiv.on('click', '#Prev', function(){
-    $('#' + indexCount).hide().removeClass('show');
+  $infoContainer.on('click', '#Prev', function(){
+    $('#' + indexCount).hide();
     indexCount--;
     if(indexCount == 0) {
       indexCount = 18;
     }
-    $('#' + indexCount).show('fade').addClass('show');
+    $('#' + indexCount).show('fade');
   });
+  $infoContainer.on('click', '#Rand', function (){
+    var randID = Math.floor((Math.random() * shoutOuts.length - 1) + 1);
+    $('#' + indexCount).hide();
+    indexCount = randID
+    $('#' + indexCount).show();
+  })
   })
 })

@@ -95,6 +95,11 @@ $(document).ready(function(){
     $('#' + indexCount).show({effect: 'fade', duration: 400});
   });
   //push new additions to the server
+  $all.on('click', '#CancelInsert', function(){
+    $shoutOutDiv.empty();
+    DisplayAnArray(shoutOuts);
+    DisplayAnArray(addedShouts);
+  })
   $all.on('click', '#CancelAdd', function(){
     indexCount = 1;
     $('#AddData').remove();
@@ -103,7 +108,6 @@ $(document).ready(function(){
     addedShouts = [];
     $shoutOutDiv.empty();
     DisplayAnArray(shoutOuts);
-
   })
   $all.on('click', '#AddData', function(){
     $shoutOutDiv.html('Updating..');

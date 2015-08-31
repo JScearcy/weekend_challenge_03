@@ -15,6 +15,7 @@ $(document).ready(function(){
   function toggleClick() {
     $('#Rand').trigger('click');
   }
+  //clear the interval and reset interval - for button clicks
   function clearAndSetShout () {
     clearInterval(clickIntervalID);
     changeShout();
@@ -121,6 +122,7 @@ $(document).ready(function(){
     DisplayAnArray(addedShouts);
     changeShout();
   })
+  //cancel the additional shoutout additions
   $all.on('click', '#CancelAdd', function(){
     indexCount = 1;
     $('#AddData').remove();
@@ -132,6 +134,7 @@ $(document).ready(function(){
     DisplayAnArray(shoutOuts);
     changeShout();
   })
+  //this sends the data to the server and returns a new array of objects to display with the updated shoutout info
   $all.on('click', '#AddData', function(){
     clearInterval(clickIntervalID);
     $shoutOutDiv.html('Updating..');

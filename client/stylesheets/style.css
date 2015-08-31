@@ -29,12 +29,6 @@ body {
   margin: -25px 0 0 0;
   float: left;
 }
-#head {
-  background-color: white;
-  border-radius: 25px;
-  width: 60%;
-  margin: 10px auto;
-}
 #Add {
   margin-top: 20px;
 }
@@ -46,6 +40,13 @@ body {
   .shoutOut {
     font-size: 25px;
   }
+  .titleHeader {
+    font-size: 30px;
+    background-color: white;
+    border-radius: 25px;
+    width: 60%;
+    margin: 10px auto;
+  }
 }
 @media (min-width: 1127px) and (max-width: 1327px) {
   .studentName {
@@ -54,6 +55,13 @@ body {
   }
   .shoutOut {
     font-size: 20px;
+  }
+  .titleHeader {
+    font-size: 30px;
+    background-color: white;
+    border-radius: 25px;
+    width: 60%;
+    margin: 10px auto;
   }
 }
 @media (min-width: 700px) and (max-width: 1126px) {
@@ -64,6 +72,13 @@ body {
   .shoutOut {
     font-size: 15px;
   }
+  .titleHeader {
+    font-size: 30px;
+    background-color: white;
+    border-radius: 25px;
+    width: 60%;
+    margin: 10px auto;
+  }
 }
 @media (max-width: 700px) {
   .studentName {
@@ -72,6 +87,13 @@ body {
   }
   .shoutOut {
     font-size: 13px;
+  }
+  .titleHeader {
+    font-size: 25px;
+    background-color: white;
+    border-radius: 25px;
+    width: 60%;
+    margin: 10px auto;
   }
 }
 .shoutText {

@@ -6,6 +6,14 @@ $(document).ready(function(){
   var shoutOuts = [];
   var addedShouts = [];
   $h1 = $('#head');
+  var clickIntervalID;
+
+  function changeShout () {
+    clickIntervalID = setInterval(toggleClick, 5000);
+  }
+  function toggleClick() {
+    $('#Rand').trigger('click');
+  }
   //query the server for an array of objects - the students and their shout outs
   function getShoutOuts(){
     return $.ajax({
@@ -41,6 +49,7 @@ $(document).ready(function(){
     var $prevBut = $('<button>').attr({class: 'prevBut', id: 'Prev'}).text('Prev').prepend($('<span>').attr({class: 'glyphicon glyphicon-chevron-left'}));
     var $randBut = $('<button>').attr({class: 'randBut', id: 'Rand'}).text('Random')
     $infoContainer.append($prevBut).append($randBut).append($nextBut);
+    changeShout();
   //when the next button is clicked, hides the current slide and shows the next one.
   $infoContainer.on('click', '#Next', function(){
     $('#' + indexCount).hide({effect: 'fade'});
@@ -68,6 +77,7 @@ $(document).ready(function(){
   })
   //this pulls the form html from the server and displays it.
   $('#Add').on('click', function(){
+    clearInterval(clickIntervalID);
     $shoutOutDiv.html('<p>Loading Info...</p>');
     $.ajax({
       type: 'GET',
@@ -93,12 +103,15 @@ $(document).ready(function(){
       $('#Add').hide();
     }
     $('#' + indexCount).show({effect: 'fade', duration: 400});
+    changeShout();
   });
   //push new additions to the server
   $all.on('click', '#CancelInsert', function(){
+    clearInterval(clickIntervalID);
     $shoutOutDiv.empty();
     DisplayAnArray(shoutOuts);
     DisplayAnArray(addedShouts);
+    changeShout();
   })
   $all.on('click', '#CancelAdd', function(){
     indexCount = 1;
@@ -106,10 +119,13 @@ $(document).ready(function(){
     $('#CancelAdd').remove();
     $('#Add').show();
     addedShouts = [];
+    clearInterval(clickIntervalID);
     $shoutOutDiv.empty();
     DisplayAnArray(shoutOuts);
+    changeShout();
   })
   $all.on('click', '#AddData', function(){
+    clearInterval(clickIntervalID);
     $shoutOutDiv.html('Updating..');
     sendShouts = {};
     addedShouts.forEach(function(obj, objI){
@@ -128,6 +144,7 @@ $(document).ready(function(){
       $('#CancelAdd').remove();
       $('#Add').show();
       addedShouts = [];
+      changeShout();
     }).fail(function(){
       console.log('Failed!');
     });

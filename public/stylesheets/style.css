@@ -32,7 +32,26 @@ body {
 #Add {
   margin-top: 20px;
 }
-@media (min-width: 1328px) {
+@media (min-width: 1455px) {
+	.studentName {
+		padding-top: 5px;
+		font-size: 34px;
+	}
+	.shoutOut {
+		font-size: 34px;
+	}
+	.titleHeader {
+		font-size: 30px;
+		background-color: white;
+		border-radius: 25px;
+		width: 60%;
+		margin: 10px auto;
+	}
+	.background {
+		min-height: 450px;
+	}
+}
+@media (min-width: 1328px) and (max-width: 1454px) {
   .studentName {
     padding-top: 5px;
     font-size: 25px;

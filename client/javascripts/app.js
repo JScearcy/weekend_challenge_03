@@ -63,7 +63,7 @@ $(document).ready(function(){
   $infoContainer.on('click', '#Rand', function (){
     var randID = Math.floor((Math.random() * (shoutOuts.length - 1)) + 1);
     $('#' + indexCount).hide({effect: 'fade'});
-    indexCount = randID
+    indexCount = randID;
     $('#' + indexCount).delay(400).show({effect: 'fade', duration: 400});
   })
   //this pulls the form html from the server and displays it.
@@ -75,7 +75,7 @@ $(document).ready(function(){
     }).done(function(data){
        $shoutOutDiv.html(data);
     })
-  })
+  });
   //add new shoutout to the document only with no push to the server
   $infoContainer.on('click', '#insertShout', function(){
     $name = $('#Name');

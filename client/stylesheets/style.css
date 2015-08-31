@@ -3,7 +3,7 @@ body {
   background-image: url('/images/corkboard.jpeg');
   text-align: center;
 }
-.students {
+.background {
   background-image: url('/images/students.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -34,6 +34,9 @@ body {
   border-radius: 25px;
   width: 60%;
   margin: 10px auto;
+}
+#Add {
+  margin-top: 20px;
 }
 @media (min-width: 1328px) {
   .studentName {
@@ -70,4 +73,13 @@ body {
   .shoutOut {
     font-size: 13px;
   }
+}
+.shoutText {
+	margin-top: 15px;
+}
+.shoutName {
+	margin-top: 5px;
+}
+.addData {
+  margin-top: 20px;
 }

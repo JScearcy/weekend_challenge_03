@@ -1,13 +1,15 @@
 $(document).ready(function(){
   $shoutOutDiv = $('.students');
   $infoContainer = $('.infoContainer');
+  $all = $('body');
   var indexCount = 1;
   var shoutOuts = [];
+  var addedShouts = [];
   $h1 = $('#head');
   //query the server for an array of objects - the students and their shout outs
   function getShoutOuts(){
     return $.ajax({
-      type: 'GET',
+      method: 'GET',
       url: '/shoutouts',
       dataType: 'json'
     }).done(function(data){
@@ -24,43 +26,107 @@ $(document).ready(function(){
     $newShoutLi.text(obj.shoutout);
     $newShoutDiv.append($newNameLi).append($newShoutLi);
     $shoutOutDiv.append($newShoutDiv.hide());
-  }
+  };
+  function DisplayAnArray(array){
+    array.forEach(function(obj){
+      displayShoutOut(obj);
+    })
+    $('#' + indexCount).show({effect: 'fade', duration: 400});
+  };
   //when the ajax query completes this runs the display function for each object in the array and adds next/prev buttons, and shows the first item
   $.when(getShoutOuts()).done(function(){
     $('#loading').remove();
-    shoutOuts.forEach(function(obj){
-      displayShoutOut(obj);
-    })
+    DisplayAnArray(shoutOuts);
     var $nextBut = $('<button>').attr({class: 'nextBut', id: 'Next'}).text('Next').append($('<span>').attr({class: 'glyphicon glyphicon-chevron-right'}));
     var $prevBut = $('<button>').attr({class: 'prevBut', id: 'Prev'}).text('Prev').prepend($('<span>').attr({class: 'glyphicon glyphicon-chevron-left'}));
     var $randBut = $('<button>').attr({class: 'randBut', id: 'Rand'}).text('Random')
-    $('#' + indexCount).show({effect: 'blind', direction: 'vertical', duration: 400});
-    // $('#' + indexCount).webTicker();
     $infoContainer.append($prevBut).append($randBut).append($nextBut);
   //when the next button is clicked, hides the current slide and shows the next one.
   $infoContainer.on('click', '#Next', function(){
     $('#' + indexCount).hide({effect: 'fade'});
     indexCount++;
-    if(indexCount == 19) {
+    if(indexCount == (shoutOuts.length - 1)) {
       indexCount = 1;
     }
-    $('#' + indexCount).delay(400).show({effect: 'blind', direction: 'vertical', duration: 400});
+    $('#' + indexCount).delay(400).show({effect: 'fade', duration: 400});
   });
   //when the prev button is clicke, hides the current slide and shows the previous one
   $infoContainer.on('click', '#Prev', function(){
     $('#' + indexCount).hide({effect: 'fade'});
     indexCount--;
     if(indexCount == 0) {
-      indexCount = 18;
+      indexCount = shoutOuts.length;
     }
-    $('#' + indexCount).delay(400).show({effect: 'blind', direction: 'vertical', duration: 400});
+    $('#' + indexCount).delay(400).show({effect: 'fade', duration: 400});
   });
   //when the random button is clicked pick random index number and display it
   $infoContainer.on('click', '#Rand', function (){
     var randID = Math.floor((Math.random() * (shoutOuts.length - 1)) + 1);
     $('#' + indexCount).hide({effect: 'fade'});
     indexCount = randID
-    $('#' + indexCount).delay(400).show({effect: 'blind', direction: 'vertical', duration: 400});
+    $('#' + indexCount).delay(400).show({effect: 'fade', duration: 400});
   })
+  //this pulls the form html from the server and displays it.
+  $('#Add').on('click', function(){
+    $shoutOutDiv.html('<p>Loading Info...</p>');
+    $.ajax({
+      type: 'GET',
+      url: '/views/add.html'
+    }).done(function(data){
+       $shoutOutDiv.html(data);
+    })
   })
-})
+  //add new shoutout to the document only with no push to the server
+  $infoContainer.on('click', '#insertShout', function(){
+    $name = $('#Name');
+    $shoutAdd = $('#ShoutOut');
+    if($name.val() && $shoutAdd.val()) {
+      addedShouts.push({name: $name.val(), shoutout: $shoutAdd.val(), id: (shoutOuts.length + 1)});
+      indexCount = shoutOuts.length + 1;
+    }
+    $shoutOutDiv.empty();
+    DisplayAnArray(shoutOuts);
+    DisplayAnArray(addedShouts);
+    if($('#AddData').attr('id') != "AddData") {
+      $('#Add').after('<button id="AddData" class="addData" name="AddData">Add Permanently</button>');
+      $('#AddData').after('<button id="CancelAdd" name="CancelAdd">Cancel</button>');
+      $('#Add').hide();
+    }
+    $('#' + indexCount).show({effect: 'fade', duration: 400});
+  });
+  //push new additions to the server
+  $all.on('click', '#CancelAdd', function(){
+    indexCount = 1;
+    $('#AddData').remove();
+    $('#CancelAdd').remove();
+    $('#Add').show();
+    addedShouts = [];
+    $shoutOutDiv.empty();
+    DisplayAnArray(shoutOuts);
+
+  })
+  $all.on('click', '#AddData', function(){
+    $shoutOutDiv.html('Updating..');
+    sendShouts = {};
+    addedShouts.forEach(function(obj, objI){
+      sendShouts[objI] = obj;
+    });
+    $.ajax({
+      method: 'PUT',
+      url: '/shoutouts',
+      data: sendShouts
+    }).done(function(data){
+      indexCount = 1;
+      shoutOuts = data;
+      $shoutOutDiv.empty();
+      DisplayAnArray(data);
+      $('#AddData').remove();
+      $('#CancelAdd').remove();
+      $('#Add').show();
+      addedShouts = [];
+    }).fail(function(){
+      console.log('Failed!');
+    });
+  });
+  });
+});

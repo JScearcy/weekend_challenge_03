@@ -32,6 +32,9 @@ body {
 #Add {
   margin-top: 20px;
 }
+#ShoutOut {
+  width: 80%;
+}
 @media (min-width: 1455px) {
 	.studentName {
 		padding-top: 5px;

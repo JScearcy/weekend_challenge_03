@@ -7,12 +7,17 @@ $(document).ready(function(){
   var addedShouts = [];
   $h1 = $('#head');
   var clickIntervalID;
-
+  //interval ID to set autoscrolling a random shoutout
   function changeShout () {
     clickIntervalID = setInterval(toggleClick, 5000);
   }
+  //this triggers the random shout click
   function toggleClick() {
     $('#Rand').trigger('click');
+  }
+  function clearAndSetShout () {
+    clearInterval(clickIntervalID);
+    changeShout();
   }
   //query the server for an array of objects - the students and their shout outs
   function getShoutOuts(){
@@ -58,6 +63,7 @@ $(document).ready(function(){
       indexCount = 1;
     }
     $('#' + indexCount).delay(400).show({effect: 'fade', duration: 400});
+    clearAndSetShout();
   });
   //when the prev button is clicke, hides the current slide and shows the previous one
   $infoContainer.on('click', '#Prev', function(){
@@ -67,6 +73,7 @@ $(document).ready(function(){
       indexCount = shoutOuts.length;
     }
     $('#' + indexCount).delay(400).show({effect: 'fade', duration: 400});
+    clearAndSetShout();
   });
   //when the random button is clicked pick random index number and display it
   $infoContainer.on('click', '#Rand', function (){
@@ -74,6 +81,7 @@ $(document).ready(function(){
     $('#' + indexCount).hide({effect: 'fade'});
     indexCount = randID;
     $('#' + indexCount).delay(400).show({effect: 'fade', duration: 400});
+    clearAndSetShout();
   })
   //this pulls the form html from the server and displays it.
   $('#Add').on('click', function(){
